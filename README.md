@@ -202,7 +202,7 @@ config.max_resources = 100; % Maximum resource allocation
 
 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/ostor.git
+git clone https://github.com/JennieCheng/OSTOR-Experiments.git
 ```
 
 2. Configure system parameters
