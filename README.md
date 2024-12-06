@@ -63,6 +63,32 @@ public class StormOSTORIntegration {
 }
 ```
 
+For custom stream processing system:
+
+```python
+class StreamProcessor:
+    def __init__(self):
+        self.resource_manager = OSTORManager()
+        self.query_optimizer = QueryOptimizer()
+        
+    def process_stream(self, stream_data):
+        # Get optimal resource allocation
+        allocation = self.resource_manager.get_optimal_allocation()
+        
+        # Optimize query execution plan
+        plan = self.query_optimizer.optimize(stream_data, allocation)
+        
+        # Execute with optimized allocation
+        return self.execute_with_allocation(stream_data, plan)
+        
+    def monitor_performance(self):
+        # Collect performance metrics
+        metrics = self.collect_metrics()
+        
+        # Adjust allocation if needed
+        self.resource_manager.adjust_allocation(metrics)
+```
+
 ## System Overview
 
 OSTOR can be integrated into existing stream processing systems like Apache Flink, Apache Storm, or custom stream processing frameworks.
@@ -145,49 +171,7 @@ function [sigma, phi, X, Y, U, profit] = reassign(b, a, sigma, phi, X, Y, U, pro
 - Performs ablation studies
 
 
-## Integration Examples
 
-### Apache Flink Integration
-```java
-public class OSTORResourceManager extends DefaultResourceManager {
-    @Override
-    public void onResourceAvailable(ResourceID resourceId) {
-        // Interface with OSTOR for optimal resource allocation
-        OSTORScheduler.allocateResource(resourceId);
-    }
-    
-    @Override
-    public void onStreamStateChange(StreamState state) {
-        // Adapt resource allocation based on stream state
-        updateAllocation(state);
-    }
-}
-```
-
-### Custom Stream Processing System
-```python
-class StreamProcessor:
-    def __init__(self):
-        self.resource_manager = OSTORManager()
-        self.query_optimizer = QueryOptimizer()
-        
-    def process_stream(self, stream_data):
-        # Get optimal resource allocation
-        allocation = self.resource_manager.get_optimal_allocation()
-        
-        # Optimize query execution plan
-        plan = self.query_optimizer.optimize(stream_data, allocation)
-        
-        # Execute with optimized allocation
-        return self.execute_with_allocation(stream_data, plan)
-        
-    def monitor_performance(self):
-        # Collect performance metrics
-        metrics = self.collect_metrics()
-        
-        # Adjust allocation if needed
-        self.resource_manager.adjust_allocation(metrics)
-```
 
 ## Performance Tuning
 
@@ -212,28 +196,6 @@ config.max_resources = 100; % Maximum resource allocation
 - Python 3.7+ (for custom integration)
 - Java 8+ (for Flink integration)
 
-## Getting Started
-
-1. Clone the repository
-```bash
-git clone https://github.com/JennieCheng/OSTOR.git
-```
-
-2. Configure system parameters
-```matlab
-% Edit config/settings.m
-config.system.parameters = your_parameters;
-```
-
-3. Run integration tests
-```bash
-matlab -nodisplay -nosplash -nodesktop -r "run_integration_tests"
-```
-
-4. Validate installation
-```matlab
-run_validation_suite
-```
 
 ## Contributing
 
