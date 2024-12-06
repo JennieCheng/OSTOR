@@ -1,53 +1,66 @@
 # OSTOR: Online Scheduling Framework
 
-OSTOR is a online scheduling framework for data trading, which can be seamlessly integrated into existing stream processing frameworks (such as Apache Flink, Apache Storm, Apache Spark Streaming). It provides efficient resource allocation and query optimization for real-time data streaming workloads while considering budget constraints and system dynamics.
+OSTOR is a online scheduling framework for data trading, which can be seamlessly integrated into existing stream processing frameworks (such as Apache Flink and Apache Storm). It provides efficient resource allocation and query optimization for continuous query scheduling while considering budget constraints and system dynamics.
 
-## Key Features
 
-- **Easy Integration**: Can be directly plugged into existing stream processing systems
-- **Framework Agnostic**: Compatible with all major stream processing frameworks
-- **Adaptive Management**: Dynamically adjusts resource allocation based on workload changes
-- **Cost-Effective**: Optimizes resource usage while respecting budget constraints
-- **Performance Oriented**: Maintains high throughput and low latency for stream processing
 
-## Supported Frameworks
+## Integration Guide
 
-- Apache Flink
-- Apache Storm
+OSTOR wrapper library integrates with stream processing frameworks including Apache Flink and Apache Storm, with a generic interface for custom integrations.
 
-## Quick Integration Guide
+Key wrapper components:
+- OSTORConfig: Configuration management
+- OSTOROptimizer: Resource optimization engine 
+- Framework integrations: FlinkOSTORIntegration, StormOSTORIntegration
+- MatlabEngine: Algorithm execution wrapper
+
+The wrapper library transforms between stream processing systems and OSTOR's optimization engine for resource allocation and query scheduling under budget constraints.
+
+### Example Usage
+
+Integration examples using OSTOR wrapper components (located in `wrapper/flink` and `wrapper/storm`):
 
 ```java
-// For Apache Flink
 public class FlinkOSTORIntegration {
     public static void configure(StreamExecutionEnvironment env) {
-        // Initialize OSTOR
+        // Initialize OSTOR using wrapper
         OSTORConfig config = new OSTORConfig()
             .setResourceMode(ResourceMode.ADAPTIVE)
-            .setMaxParallelism(10);
+            .setMaxParallelism(10)
+            .setLearningRate(0.7)
+            .setWindowSize(100);
             
-        // Attach OSTOR resource manager
-        env.setResourceManager(new OSTORResourceManager(config));
+        // Attach OSTOR resource manager from wrapper
+        env.setResourceManager(new FlinkOSTORResourceManager(config));
+        
+        // Attach OSTOR scheduler from wrapper
+        env.setScheduler(new FlinkOSTORScheduler(config));
         
         // Enable dynamic scaling
         env.enableDynamicScaling(true);
     }
 }
 
-// For Apache Storm
 public class StormOSTORIntegration {
     public static void configure(TopologyBuilder builder) {
-        // Add OSTOR resource management
+        // Create OSTOR configuration
+        OSTORConfig config = new OSTORConfig()
+            .setResourceMode(ResourceMode.ADAPTIVE)
+            .setMaxParallelism(10);
+
+        // Add OSTOR resource management using wrapper
         Config conf = new Config();
         conf.put(Config.TOPOLOGY_RAS_MANAGER, 
-                "com.ostor.storm.OSTORResourceManager");
+                "com.ostor.wrapper.storm.StormOSTORResourceManager");
                 
-        // Set adaptive scheduling
+        // Set OSTOR scheduler using wrapper
         conf.put(Config.TOPOLOGY_SCHEDULER_STRATEGY,
-                "com.ostor.storm.OSTORScheduler");
+                "com.ostor.wrapper.storm.StormOSTORScheduler");
+
+        // Apply configuration
+        StormOSTORResourceManager.setConfig(config);
     }
 }
-```
 
 ## System Overview
 
