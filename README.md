@@ -1,12 +1,11 @@
 # OSTOR: Online Scheduling Framework
 
-OSTOR is a online scheduling framework for data trading, which can be seamlessly integrated into existing stream processing frameworks (such as Apache Flink and Apache Storm). It provides efficient resource allocation and query optimization for continuous query scheduling while considering budget constraints and system dynamics.
-
+OSTOR is an online scheduling framework for data trading that provides efficient resource allocation and query optimization for continuous query scheduling while considering budget constraints and system dynamics.
 
 
 ## Integration Guide
 
-OSTOR wrapper library integrates with stream processing frameworks including Apache Flink and Apache Storm, with a generic interface for custom integrations.
+OSTOR wrapper library integrates with existing stream processing frameworks such as Apache Flink and Apache Storm. The library includes both framework-specific integrations and a generic interface for custom implementations.
 
 Key wrapper components:
 - OSTORConfig: Configuration management
@@ -89,9 +88,7 @@ class StreamProcessor:
         self.resource_manager.adjust_allocation(metrics)
 ```
 
-## System Overview
-
-OSTOR can be integrated into existing stream processing systems like Apache Flink, Apache Storm, or custom stream processing frameworks.
+## OSTOR Implementation Overview
 
 ## Code Structure and Implementation Guide
 
