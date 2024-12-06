@@ -99,7 +99,7 @@ function [sigma, phi, profit, u, d] = ostor(v, b, a, B, flag)
 ```
 - **Purpose**: Main implementation of OSTOR algorithm
 - **Key Components**:
-  - Dynamic resource allocation
+  - Online query scheduling 
   - Budget tracking
   - Profit calculation
   - Utilization monitoring
@@ -138,7 +138,7 @@ function [sigma, phi, X, Y, U, profit] = reactivate(b, a, sigma, phi, X, Y, U, p
 ```matlab
 function [sigma, phi, X, Y, U, profit] = reassign(b, a, sigma, phi, X, Y, U, profit, tb)
 ```
-- **Purpose**: Implements dynamic reassignment strategy (IRS)
+- **Purpose**: Implements dynamic reassignment strategy (DRS)
 - **When to Use**: For handling queries that become profitable
 
 ### Experimental Validation
@@ -149,12 +149,12 @@ function [sigma, phi, X, Y, U, profit] = reassign(b, a, sigma, phi, X, Y, U, pro
 - Validates adaptive behavior
 
 #### 2. Plan-based Evaluation (`test_plan_sw_exp2.m`)
-- Evaluates different planning strategies
+- Evaluates different plan settings
 - Measures plan effectiveness
 - Compares resource utilization
 
 #### 3. Query-based Evaluation (`test_query_sw_exp3.m`, `test_query_cost_exp4.m`)
-- Analyzes query performance
+- Evaluates different query settings
 - Measures query costs
 - Evaluates optimization effectiveness
 
@@ -186,9 +186,9 @@ config.max_resources = 100; % Maximum resource allocation
 
 ## Requirements
 
-- MATLAB R2020a or later
 - Compatible with major stream processing frameworks
 - Minimum 8GB RAM for experimental validation
+- MATLAB R2020a or later
 - Python 3.7+ (for custom integration)
 - Java 8+ (for Flink integration)
 
