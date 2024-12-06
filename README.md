@@ -1,7 +1,6 @@
 # OSTOR: Online Scheduling Framework
 
-OSTOR is an online scheduling framework for data trading that provides efficient resource allocation and query optimization for continuous query scheduling while considering budget constraints and system dynamics.
-
+OSTOR is an online scheduling framework for data trading that provides efficient resource allocation and query optimization for continuous query scheduling while considering budget constraints and system dynamics. This README contains the Integration Guide for incorporating OSTOR into stream processing systems, as well as an Overview of OSTOR's components and features.
 
 ## Integration Guide
 
@@ -88,7 +87,7 @@ class StreamProcessor:
         self.resource_manager.adjust_allocation(metrics)
 ```
 
-## OSTOR Implementation Overview
+## OSTOR Overview
 
 ## Code Structure and Implementation Guide
 
